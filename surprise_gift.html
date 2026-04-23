@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gift for You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: linear-gradient(135deg, #ffe6f0, #fff0f5);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* GIFT SCREEN */
+#giftBox {
+  font-size: 80px;
+  cursor: pointer;
+  text-align: center;
+}
+
+#tapText {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #ff4d6d;
+}
+
+/* MAIN CARD */
+.card {
+  display: none;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+h1 {
+  color: #ff4d6d;
+}
+
+p {
+  color: #333;
+}
+
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: #999;
+  position: absolute;
+}
+
+/* ROSES */
+.rose {
+  font-size: 25px;
+  margin: 5px;
+  animation: pop 0.6s ease-in-out;
+}
+
+@keyframes pop {
+  from {transform: scale(0);}
+  to {transform: scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- GIFT -->
+<div id="giftBox">
+  🎁
+  <div id="tapText">Tap the gift</div>
+</div>
+
+<!-- QUIZ CARD -->
+<div class="card" id="card">
+  <h1>Hello Love ❤️</h1>
+
+  <p>You make my world better every day 💖</p>
+  <p><b>Can you be my love for one day? 🥺</b></p>
+
+  <button class="btn" id="yes">Yes ❤️</button>
+  <button class="btn" id="no">No 😅</button>
+</div>
+
+<script>
+
+const giftBox = document.getElementById("giftBox");
+const card = document.getElementById("card");
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+
+let noMoves = 0;
+
+/* OPEN GIFT */
+giftBox.addEventListener("click", () => {
+  giftBox.style.display = "none";
+  card.style.display = "block";
+});
+
+/* NO BUTTON MOVE 7 TIMES */
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+function moveNo() {
+  if (noMoves >= 7) return;
+
+  const x = Math.random() * (card.clientWidth - 100);
+  const y = Math.random() * (card.clientHeight - 100);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+
+  noMoves++;
+}
+
+/* YES CLICK */
+yesBtn.addEventListener("click", () => {
+  card.innerHTML = `
+    <h1>I knew it 😍❤️</h1>
+    <p>You just made me the happiest person 💖</p>
+    <p>Thank you my love Hadassah 🥰</p>
+    <div id="roses"></div>
+  `;
+
+  showRoses();
+});
+
+/* ROSES ANIMATION */
+function showRoses() {
+  const rosesDiv = document.getElementById("roses");
+
+  let count = 0;
+  const interval = setInterval(() => {
+    const rose = document.createElement("div");
+    rose.classList.add("rose");
+    rose.innerHTML = "🌹";
+    rosesDiv.appendChild(rose);
+
+    count++;
+    if (count >= 15) clearInterval(interval);
+  }, 150);
+}
+
+</script>
+
+</body>
+</html>
